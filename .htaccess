@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule images/(.*)$ /images.php?img=$1
