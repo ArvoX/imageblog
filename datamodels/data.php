@@ -23,6 +23,7 @@ class Data
 		$stmt = $db->prepare($sql);
 		$stmt->bind_param('i', $id);
 		$stmt->execute();
+		$stmt->fetch();
 		$stmt->bind_result($id, $name, $text);
 		$result = new Result(array('id' => $id, 'name' => $name, 'text' => $text));
 		return $result;
@@ -60,10 +61,11 @@ class Data
 	public static function getImage($name)
 	{
 		$db = self::db();
-		$sql = 'SELECT image, imageType, updated FROM entries WHERE name = ?';
+		$sql = 'SELECT image, imageType, UNIX_TIMESTAMP(updated) FROM entries WHERE name = ?';
 		$stmt = $db->prepare($sql);
 		$stmt->bind_param('s', $name);
 		$stmt->execute();
+		$stmt->fetch();
 		$stmt->bind_result($image, $imageType, $updated);
 		$result = new Result(array('image' => $image, 'imageType' => $imageType, 'updated' => $updated));
 		return $result;
