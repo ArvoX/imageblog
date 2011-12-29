@@ -24,7 +24,7 @@ class Data
 		$stmt->bind_param('i', $id);
 		$stmt->execute();
 		$stmt->bind_result($id, $name, $text);
-		$result = new Result($id, $name, $text);
+		$result = new Result(array('id' => $id, 'name' => $name, 'text' => $text));
 		return $result;
 	}
 
@@ -37,7 +37,7 @@ class Data
 		$stmt->execute();
 		$stmt->bind_result($id, $name, $text);
 		$stmt->fetch();
-		$result = new Result($id, $name, $text);
+		$result = new Result(array('id' => $id, 'name' => $name, 'text' => $text));
 		return $result;
 	}
 
@@ -52,7 +52,7 @@ class Data
 		$stmt->bind_result($id, $name, $text);
 		while($stmt->fetch())
 		{
-			$results[] = new Result($id, $name, $text);
+			$results[] = new Result(array('id' => $id, 'name' => $name, 'text' => $text));
 		}
 		return $results;
 	}
@@ -93,9 +93,9 @@ EOT;
 class Result
 {
 	private $data;
-	public function __construct()
+	public function __construct($data)
 	{
-		$this->data = func_get_args();
+		$this->data = $data;
 	}
 
 	public function __get($key)
