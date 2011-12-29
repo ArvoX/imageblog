@@ -64,8 +64,8 @@ class Data
 		$stmt = $db->prepare($sql);
 		$stmt->bind_param('s', $name);
 		$stmt->execute();
-		$stmt->bind_result($image, $imageType);
-		$result = new Result($image, $imageType);
+		$stmt->bind_result($image, $imageType, $updated);
+		$result = new Result(array('image' => $image, 'imageType' => $imageType, 'updated' => $updated);
 		return $result;
 	}
 
