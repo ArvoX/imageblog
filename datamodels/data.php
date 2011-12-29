@@ -9,9 +9,9 @@ class Data
 	private static function db()
 	{
 		if(is_null(self::$db))
-			self::$db = @new mysqli(Config::DbHost, Config::DbUser, Config::DbPass, Config::DbDb);
-		if(self::$db->connect_error)
-			throw new DatabaseException('Could not connect to database: '.self::$db->connect_error);
+			self::$db = new mysqli(Config::DbHost, Config::DbUser, Config::DbPass, Config::DbDb);
+//		if(self::$db->connect_error)
+//			throw new DatabaseException('Could not connect to database: '.self::$db->connect_error);
 		return self::$db;
 
 	}
