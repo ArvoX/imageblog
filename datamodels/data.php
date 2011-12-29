@@ -36,6 +36,7 @@ class Data
 		$stmt->bind_param('s', $name);
 		$stmt->execute();
 		$stmt->bind_result($id, $name, $text);
+		$stmt->fetch();
 		$result = new Result($id, $name, $text);
 		return $result;
 	}
@@ -48,7 +49,8 @@ class Data
 		$stmt->bind_param('ii', $offset, $count);
 		$stmt->execute();
 		$results = array();
-		while($stmt->bind_result($id, $name, $text))
+		$stmt->bind_result($id, $name, $text)
+		while($stmt->fetch())
 		{
 			$results[] = new Result($id, $name, $text);
 		}
