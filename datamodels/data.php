@@ -49,7 +49,7 @@ class Data
 		$stmt->bind_param('ii', $offset, $count);
 		$stmt->execute();
 		$results = array();
-		$stmt->bind_result($id, $name, $text)
+		$stmt->bind_result($id, $name, $text);
 		while($stmt->fetch())
 		{
 			$results[] = new Result($id, $name, $text);
