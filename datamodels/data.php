@@ -65,7 +65,7 @@ class Data
 		$stmt->bind_param('s', $name);
 		$stmt->execute();
 		$stmt->bind_result($image, $imageType, $updated);
-		$result = new Result(array('image' => $image, 'imageType' => $imageType, 'updated' => $updated);
+		$result = new Result(array('image' => $image, 'imageType' => $imageType, 'updated' => $updated));
 		return $result;
 	}
 
