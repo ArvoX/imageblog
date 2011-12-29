@@ -1,4 +1,7 @@
 <?php
+require_once 'config.php';
+require_once 'datamodels/data.php';
+
 $name = $_GET['img'];
 $data = Data::getImage($name);
 
