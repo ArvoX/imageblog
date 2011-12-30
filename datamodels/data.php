@@ -76,9 +76,9 @@ class Data
 		$db = self::db();
 		$sql = <<<EOT
 CREATE TABLE `entries`(
-  `id` INT UNSIGNED NOT NULL,
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
-  `image` BLOB NOT NULL,
+  `image` MEDIUMBLOB NOT NULL,
   `imageType` CHAR(3) NOT NULL,
   `text` TEXT NOT NULL,
   `date` TIMESTAMP NULL DEFAULT NULL,
