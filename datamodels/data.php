@@ -23,8 +23,8 @@ class Data
 		$stmt = $db->prepare($sql);
 		$stmt->bind_param('i', $id);
 		$stmt->execute();
-		$stmt->fetch();
 		$stmt->bind_result($id, $name, $text);
+		$stmt->fetch();
 		$result = new Result(array('id' => $id, 'name' => $name, 'text' => $text));
 		return $result;
 	}
@@ -65,8 +65,8 @@ class Data
 		$stmt = $db->prepare($sql);
 		$stmt->bind_param('s', $name);
 		$stmt->execute();
-		$stmt->fetch();
 		$stmt->bind_result($image, $imageType, $updated);
+		$stmt->fetch();
 		$result = new Result(array('image' => $image, 'imageType' => $imageType, 'updated' => $updated));
 		return $result;
 	}
