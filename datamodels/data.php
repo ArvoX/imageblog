@@ -25,7 +25,7 @@ class Data
 		$stmt->execute();
 		$stmt->bind_result($id, $name, $text);
 		$stmt->fetch();
-		$result = new Result(compact($id, $name, $text));
+		$result = new Result(self::compact($id, $name, $text));
 		return $result;
 	}
 
@@ -38,7 +38,7 @@ class Data
 		$stmt->execute();
 		$stmt->bind_result($id, $name, $text);
 		$stmt->fetch();
-		$result = new Result(compact($id, $name, $text));
+		$result = new Result(self::compact($id, $name, $text));
 		return $result;
 	}
 
@@ -53,7 +53,7 @@ class Data
 		$stmt->bind_result($id, $name, $text);
 		while($stmt->fetch())
 		{
-			$results[] = new Result(compact($id, $name, $text));
+			$results[] = new Result(self::compact($id, $name, $text));
 		}
 		return $results;
 	}
@@ -67,7 +67,7 @@ class Data
 		$stmt->execute();
 		$stmt->bind_result($image, $imageType, $updated);
 		$stmt->fetch();
-		$result = new Result(compact($image, $imageType, $updated));
+		$result = new Result(self::compact($image, $imageType, $updated));
 		return $result;
 	}
 	
@@ -81,9 +81,14 @@ class Data
 		$stmt->bind_result($id, $name, $url, $align);
 		while($stmt->fetch())
 		{
-			$results[] = new Result(compact($id, $name, $url, $align));
+			$results[] = new Result(self::compact($id, $name, $url, $align));
 		}
 		return $results;
+	}
+
+	private static function compact()
+	{
+		return func_get_args();
 	}
 
 	public static function install()
