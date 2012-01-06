@@ -1,3 +1,4 @@
 body { color: #fff; background-color: #000; }
 h1 { margin: 0px; }
-.entry { border: 1px solid #888; border-radius: 10px; padding: 10px; }
+.entry { border: 1px solid #888; border-radius: 10px; padding: 10px; width: 600px; margin: 20px auto; }
+.entry img { margin: 0 auto; max-width: 580px; }

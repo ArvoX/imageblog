@@ -4,7 +4,7 @@ class Config
 	const DebugMode = false;
 	const NumberOfEntries = 20;
 	const Title = 'Image blog';
-	const Style = '/style.css';
+	const Style = 'style.css';
 
 	const DbHost = 'localhost';
 	const DbUser = 'user';
