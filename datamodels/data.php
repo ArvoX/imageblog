@@ -25,7 +25,7 @@ class Data
 		$stmt->execute();
 		$stmt->bind_result($id, $name, $text);
 		$stmt->fetch();
-		$result = new Result(array('id' => $id, 'name' => $name, 'text' => $text));
+		$result = new Result(compact($id, $name, $text));
 		return $result;
 	}
 
@@ -38,7 +38,7 @@ class Data
 		$stmt->execute();
 		$stmt->bind_result($id, $name, $text);
 		$stmt->fetch();
-		$result = new Result(array('id' => $id, 'name' => $name, 'text' => $text));
+		$result = new Result(compact($id, $name, $text));
 		return $result;
 	}
 
@@ -53,7 +53,7 @@ class Data
 		$stmt->bind_result($id, $name, $text);
 		while($stmt->fetch())
 		{
-			$results[] = new Result(array('id' => $id, 'name' => $name, 'text' => $text));
+			$results[] = new Result(compact($id, $name, $text));
 		}
 		return $results;
 	}
@@ -67,14 +67,29 @@ class Data
 		$stmt->execute();
 		$stmt->bind_result($image, $imageType, $updated);
 		$stmt->fetch();
-		$result = new Result(array('image' => $image, 'imageType' => $imageType, 'updated' => $updated));
+		$result = new Result(compact($image, $imageType, $updated));
 		return $result;
+	}
+	
+	public static function getMenubarMenus()
+	{
+		$db = self::db();
+		$sql = 'SELECT id, name, url, align FROM menubar ORDER BY order';
+		$stmt = $db->prepare($sql);
+		$stmt->execute();
+		$results = array();
+		$stmt->bind_result($id, $name, $url, $align);
+		while($stmt->fetch())
+		{
+			$results[] = new Result(compact($id, $name, $url, $align));
+		}
+		return $results;
 	}
 
 	public static function install()
 	{
 		$db = self::db();
-		$sql = <<<EOT
+		$sqls[] = <<<EOT
 CREATE TABLE `entries`(
   `id` INT UNSIGNED NOT NULL,
   `name` VARCHAR(255) NOT NULL,
@@ -88,7 +103,19 @@ CREATE TABLE `entries`(
   UNIQUE (`name`)
 ) ENGINE = MYISAM;
 EOT;
-		$db->query($sql);
+		$sqls[] = <<<EOT
+CREATE TABLE `menubar`(
+  `id` INT UNSIGNED NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `url` VARCHAR(255) NOT NULL,
+  `order` INT NOT NULL DEFAULT 0,
+  `align` SET('l','c','r') NOT NULL DEFAULT 'l',
+  PRIMARY KEY (`id`),
+  INDEX (`order`)
+) ENGINE = MYISAM;
+EOT;
+		foreach($sqls as $sql)
+			$db->query($sql);
 	}
 }
 
