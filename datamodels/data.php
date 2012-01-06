@@ -19,7 +19,7 @@ class Data
 	public static function getEntry($id)
 	{
 		$db = self::db();
-		$sql = 'SELECT id, name, text FROM entries WHERE id = ?';
+		$sql = 'SELECT `id`, `name`, `text` FROM `entries` WHERE `id` = ?';
 		$stmt = $db->prepare($sql);
 		$stmt->bind_param('i', $id);
 		$stmt->execute();
@@ -32,7 +32,7 @@ class Data
 	public static function getEntryFromName($name)
 	{
 		$db = self::db();
-		$sql = 'SELECT id, name, text FROM entries WHERE name = ?';
+		$sql = 'SELECT `id`, `name`, `text` FROM `entries` WHERE `name` = ?';
 		$stmt = $db->prepare($sql);
 		$stmt->bind_param('s', $name);
 		$stmt->execute();
@@ -45,7 +45,7 @@ class Data
 	public static function getNewestEntries($count, $offset)
 	{
 		$db = self::db();
-		$sql = 'SELECT id, name, text FROM entries ORDER BY date LIMIT ?,?';
+		$sql = 'SELECT `id`, `name`, `text` FROM `entries` ORDER BY `date` LIMIT ?,?';
 		$stmt = $db->prepare($sql);
 		$stmt->bind_param('ii', $offset, $count);
 		$stmt->execute();
@@ -61,7 +61,7 @@ class Data
 	public static function getImage($name)
 	{
 		$db = self::db();
-		$sql = 'SELECT image, imageType, UNIX_TIMESTAMP(updated) FROM entries WHERE name = ?';
+		$sql = 'SELECT `image`, `imageType`, UNIX_TIMESTAMP(`updated`) FROM `entries` WHERE `name` = ?';
 		$stmt = $db->prepare($sql);
 		$stmt->bind_param('s', $name);
 		$stmt->execute();
@@ -74,7 +74,7 @@ class Data
 	public static function getMenubarMenus()
 	{
 		$db = self::db();
-		$sql = 'SELECT id, name, url, align FROM menubar ORDER BY order';
+		$sql = 'SELECT `id`, `name`, `url`, `align` FROM `menubar` ORDER BY `order`';
 		$stmt = $db->prepare($sql);
 		$stmt->execute();
 		$results = array();
